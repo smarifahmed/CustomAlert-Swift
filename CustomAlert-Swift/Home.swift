@@ -35,11 +35,10 @@ class Home: UIViewController {
     }
     
     @objc private func showAlert(){
-        print("Show Alert")
-        AlertService.showAlert(self, title: "Warning", message: "Show Alert Message here! Show Alert Message here! Show Alert Message here! Show Alert Message here!Show Alert Message here! Show Alert Message here! Show Alert Message here! Show Alert Message here!Show Alert Message here! Show Alert Message here! Show Alert Message here! Show Alert Message here!") { action in
+        AlertService.showAlert(self, title: "Warning", message: "Show Alert Message here! Whatever message you wanna show, type here. The height will increase dynamically.") { action in
             switch action {
             case .firstButton:
-                print("Fist Button Tapped")
+                print("First Button Tapped")
             case .secondButton:
                 print("Second Button Tapped")
             }

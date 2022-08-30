@@ -15,6 +15,7 @@ class AlertViewController : UIViewController{
     
     private let alertView = AlertView()
     var alertAction : ((AlertAction) -> Void)?
+    var isSingleButton : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +37,12 @@ class AlertViewController : UIViewController{
     }
     
     //MARK: - Functions
-    func setAlertTexts(_ title : String, _ message : String){
+    func setAlertTexts(_ title : String, _ message : String, _ first : String, _ second : String = "Confirm"){
         alertView.title.text = title
         alertView.message.text = message
-        
+        alertView.firstButton.setTitle(first, for: .normal)
+        alertView.secondButton.setTitle(second, for: .normal)
+        alertView.secondButton.isHidden = isSingleButton
     }
     
     //MARK: - Actions

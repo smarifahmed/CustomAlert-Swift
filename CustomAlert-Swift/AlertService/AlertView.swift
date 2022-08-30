@@ -33,7 +33,7 @@ class AlertView: UIView {
         let button = UIButton()
         button.setTitle("Cancel", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
-        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = .systemRed
         button.tag = 1
         return button
@@ -43,7 +43,7 @@ class AlertView: UIView {
         let button = UIButton()
         button.setTitle("Confirm", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .medium)
-        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = .systemGreen
         button.tag = 2
         return button
@@ -65,6 +65,9 @@ class AlertView: UIView {
         let stack = UIStackView()
         stack.distribution = .fillEqually
         stack.axis = .horizontal
+        stack.layer.cornerRadius = 20
+        stack.layer.maskedCorners =  [.layerMinXMaxYCorner , .layerMaxXMaxYCorner]
+        stack.clipsToBounds = true
         [firstButton, secondButton]
             .forEach { label in
                 stack.addArrangedSubview(label)
@@ -80,7 +83,10 @@ class AlertView: UIView {
         stack.axis = .vertical
         stack.layer.cornerRadius = 20
         stack.backgroundColor = alertBackground
-        stack.clipsToBounds = true
+        stack.layer.shadowColor = UIColor.lightGray.cgColor
+        stack.layer.shadowOffset = CGSize(width: 10, height: 10)
+        stack.layer.shadowRadius = 5
+        stack.layer.shadowOpacity = 1
         [paddingView, title, message, paddingView2, buttonStack]
             .forEach { view in
                 stack.addArrangedSubview(view)
