@@ -36,6 +36,14 @@ class Home: UIViewController {
     
     @objc private func showAlert(){
         print("Show Alert")
+        AlertService.showAlert(self, title: "Warning", message: "Show Alert Message here! Show Alert Message here! Show Alert Message here! Show Alert Message here!Show Alert Message here! Show Alert Message here! Show Alert Message here! Show Alert Message here!Show Alert Message here! Show Alert Message here! Show Alert Message here! Show Alert Message here!") { action in
+            switch action {
+            case .firstButton:
+                print("Fist Button Tapped")
+            case .secondButton:
+                print("Second Button Tapped")
+            }
+        }
     }
 
 }

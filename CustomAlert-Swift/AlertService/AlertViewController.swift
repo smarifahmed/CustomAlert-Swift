@@ -7,9 +7,14 @@
 
 import UIKit
 
+enum AlertAction {
+    case firstButton , secondButton
+}
+
 class AlertViewController : UIViewController{
     
-    private lazy var alertView = AlertView()
+    private let alertView = AlertView()
+    var alertAction : ((AlertAction) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,12 +23,37 @@ class AlertViewController : UIViewController{
     
     private func setUpSubviews(){
         view.addSubview(alertView)
-        view.backgroundColor = .black.withAlphaComponent(0.3)
+        alertView.backgroundColor = .black.withAlphaComponent(0.3)
         
         alertView.translatesAutoresizingMaskIntoConstraints = false
         alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        alertView.widthAnchor.constraint(equalTo: view.widthAnchor , multiplier: 0.75 ).isActive = true
-        //alertView.heightAnchor.constraint(equalToConstant: 200 ).isActive = true
+        alertView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        alertView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        
+        alertView.firstButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+        alertView.secondButton.addTarget(self, action: #selector(buttonAction(_:)), for: .touchUpInside)
+    }
+    
+    //MARK: - Functions
+    func setAlertTexts(_ title : String, _ message : String){
+        alertView.title.text = title
+        alertView.message.text = message
+        
+    }
+    
+    //MARK: - Actions
+    @objc private func buttonAction(_ button : UIButton){
+        if let alertAction = alertAction {
+            switch button.tag{
+            ///FirstButton
+            case 1 : alertAction(.firstButton)
+                
+            ///SecondButton
+            case 2 : alertAction(.secondButton)
+            default: break
+            }
+        }
+        self.dismiss(animated: true)
     }
 }
